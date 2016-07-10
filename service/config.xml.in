@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns="http://www.w3.org/ns/widgets" id="${PROJECT_NAME}" version="${PROJECT_VERSION}">
-  <name>App Framework - ${PROJECT_NAME}</name>
-  <icon src="${PROJECT_ICON}"/>
+<widget xmlns="http://www.w3.org/ns/widgets" id="@PROJECT_NAME@" version="@PROJECT_VERSION@">
+  <name>App Framework - @PROJECT_NAME@</name>
+  <icon src="@PROJECT_ICON@"/>
   <content src=""/>
   <description>This service us used for ... (TODO: add description here)</description>
   <author>John Doe &lt;john.doe@example.com&gt;</author>

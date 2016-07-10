@@ -2,8 +2,8 @@
 <widget xmlns="http://www.w3.org/ns/widgets" id="@PROJECT_NAME@" version="@PROJECT_VERSION@">
   <name>App Framework - @PROJECT_NAME@</name>
   <icon src="@PROJECT_ICON@"/>
-  <content src="@PROJECT_LIBDIR@" type="application/vnd.agl.service"/>
-  <description>This service is used for ... (TODO: add description here)</description>
+  <content src="@PROJECT_NAME@"/>
+  <description>This application is used for ... (TODO: add description here)</description>
   <author>John Doe &lt;john.doe@example.com&gt;</author>
   <license>APL 2.0</license>
 </widget>

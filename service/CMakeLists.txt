@@ -25,6 +25,7 @@ include(GNUInstallDirs)
 
 set(PROJECT_ICON "icon_service_128.png")
 set(PROJECT_VERSION "0.1")
+set(PROJECT_LIBDIR "lib")
 
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -72,8 +73,9 @@ add_custom_command(
 	OUTPUT ${PROJECT_NAME}.wgt
 	DEPENDS ${PROJECT_NAME} config.xml
 	COMMAND rm -rf package
-	COMMAND mkdir package
-	COMMAND cp ${PROJECT_NAME}.so ${PROJECT_ICON} config.xml package/
+	COMMAND mkdir -p package/${PROJECT_LIBDIR} package/htdocs
+	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_ICON} config.xml package/
+	COMMAND cp ${PROJECT_NAME}.so package/${PROJECT_LIBDIR}
 	COMMAND wgtpkg-pack -f -o ${PROJECT_NAME}.wgt package 
 	COMMAND rm -rf package
 )

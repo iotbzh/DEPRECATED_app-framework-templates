@@ -71,7 +71,7 @@ configure_file(config.xml.in config.xml)
 
 add_custom_command(
 	OUTPUT ${PROJECT_NAME}.wgt
-	DEPENDS ${PROJECT_NAME} config.xml
+	DEPENDS ${PROJECT_NAME}
 	COMMAND rm -rf package
 	COMMAND mkdir -p package/${PROJECT_LIBDIR} package/htdocs
 	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_ICON} config.xml package/

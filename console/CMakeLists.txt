@@ -87,7 +87,7 @@ add_custom_command(
 	DEPENDS ${PROJECT_NAME} config.xml
 	COMMAND rm -rf package
 	COMMAND mkdir -p package/htdocs
-	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_ICON} config.xml package/
+	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/../icons/${PROJECT_ICON} config.xml package/
 	COMMAND cp ${PROJECT_NAME} package/
 	COMMAND wgtpkg-pack -f -o ${PROJECT_NAME}.wgt package 
 	COMMAND rm -rf package

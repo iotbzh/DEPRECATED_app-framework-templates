@@ -50,18 +50,22 @@ set(CMAKE_C_FLAGS_CCOV         "-g -O2 --coverage")
 include(FindPkgConfig)
 
 pkg_check_modules(json-c REQUIRED json-c)
+pkg_check_modules(libafbwsc REQUIRED libafbwsc)
 pkg_check_modules(libsystemd REQUIRED libsystemd>=222)
 
 add_compile_options(
+	${libafbwsc_CFLAGS}
 	${json-c_CFLAGS}
 	${libsystemd_CFLAGS}
 )
 include_directories(
+	${libafbwsc_INCLUDE_DIRS}
 	${json-c_INCLUDE_DIRS}
 	${libsystemd_INCLUDE_DIRS}
 )
 link_libraries(
 	${CMAKE_THREAD_LIBS_INIT}
+	${libafbwsc_LIBRARIES}
 	${json-c_LIBRARIES}
 	${libsystemd_LIBRARIES}
 )
@@ -84,9 +88,9 @@ configure_file(config.xml.in config.xml)
 
 add_custom_command(
 	OUTPUT ${PROJECT_NAME}.wgt
-	DEPENDS ${PROJECT_NAME} config.xml
+	DEPENDS ${PROJECT_NAME} 
 	COMMAND rm -rf package
-	COMMAND mkdir -p package/htdocs
+	COMMAND mkdir -p package
 	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/../icons/${PROJECT_ICON} config.xml package/
 	COMMAND cp ${PROJECT_NAME} package/
 	COMMAND wgtpkg-pack -f -o ${PROJECT_NAME}.wgt package 

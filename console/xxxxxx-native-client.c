@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright (C) 2015, 2016 "IoT.bzh"
  * Author "Fulup Ar Foll" <fulup@iot.bzh>
  * Author José Bollo <jose.bollo@iot.bzh>
@@ -30,9 +30,8 @@
 
 #include <systemd/sd-event.h>
 
-#include "afb-common.h"  /* TODO: remove dependency to afb-common.h */
-#include "afb-wsj1.h"
-#include "afb-ws-client.h"
+#include <afb/afb-wsj1.h>
+#include <afb/afb-ws-client.h>
 
 /* declaration of functions */
 static void on_hangup(void *closure, struct afb_wsj1 *wsj1);
@@ -63,6 +62,20 @@ static void usage(int status, char *arg0)
 	exit(status);
 }
 
+static struct sd_event *_get_event_loop()
+{
+    static struct sd_event *result = NULL;
+	int rc;
+	if (result == NULL) {
+		rc=sd_event_new(&result);
+		if (rc<0) {
+			errno = -rc;
+			result = NULL;
+		}
+	}
+	return result;
+}
+
 /* entry function */
 int main(int ac, char **av, char **env)
 {
@@ -85,7 +98,7 @@ int main(int ac, char **av, char **env)
 	if (ac == 2) {
 		/* get requests from stdin */
 		fcntl(0, F_SETFL, O_NONBLOCK);
-		sd_event_add_io(afb_common_get_event_loop(), &evsrc, 0, EPOLLIN, io_event_callback, NULL);
+		sd_event_add_io(_get_event_loop(), &evsrc, 0, EPOLLIN, io_event_callback, NULL);
 	} else {
 		/* the request is defined by the arguments */
 		exonrep = 1;
@@ -94,7 +107,7 @@ int main(int ac, char **av, char **env)
 
 	/* loop until end */
 	for(;;)
-		sd_event_run(afb_common_get_event_loop(), 30000000);
+		sd_event_run(_get_event_loop(), 30000000);
 	return 0;
 }
 

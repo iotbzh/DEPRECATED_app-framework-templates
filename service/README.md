@@ -1,4 +1,4 @@
-# Application Framework Service Template
+# Application Framework - Service Template
 
 ## Instructions
 
@@ -6,27 +6,29 @@ Duplicate directory and adjust names. In particular, replace 'xxxxxx' by a prope
 
 * adjust CMakeLists.txt (project name and version)
 * ajdust config.xml (description, author, license...)
-* rename xxxxxx-service-binding.c to something more meaningful
-* update icon file (if name is changed, update the variable PROJECT_ICON in CMakeLists.txt)
+* rename xxxxxx-service-binding.c to something meaningful
+* store icon file in icons directory and update the variable PROJECT_ICON in CMakeLists.txt
 
 ## Build
 
 Run:
 
 ```
-cmake
+mkdir build
+cd build
+cmake ..
 make
 ```
 
 ## Deployment
 
-Copy the .wgt file on target and install it:
+Copy the .wgt file on the target through ssh and install it (adjust BOARDIP to your real IP address):
 
 ```
 $ BOARDIP=1.2.3.4
-$ scp *.wgt root@$BOARDIP:/tmp
+$ scp xxxxxx-service.wgt root@$BOARDIP:/tmp
 $ ssh root@$BOARDIP
-# afm-util install /tmp/*.wgt
+# afm-util install /tmp/xxxxxx-service.wgt
 # afm-util list
 ```
 
@@ -35,13 +37,15 @@ $ ssh root@$BOARDIP
 On the target board:
 
 ```
-# afb-daemon --token=qwerty --ldpaths=/usr/share/afm/applications/xxxxxx-service/0.1/ --port=5555 --rootdir=. --verbose --verbose --verbose --verbose --verbose
+# afm-util start xxxxxx-server@0.1
+# ps -ef| grep afb-daemon | grep xxx
 ```
 
 ## Test using curl
 
 ```
-# curl -v http://localhost:5555/api/xxxxxx/ping
+# PORT=12345 # adjust the port depending in on afb-daemon instance: use ps -ef to check
+# curl -v http://localhost:$PORT/api/xxxxxx/ping
 *   Trying 127.0.0.1...
 * Connected to localhost (127.0.0.1) port 5555 (#0)
 > GET /api/xxxxxx/ping HTTP/1.1

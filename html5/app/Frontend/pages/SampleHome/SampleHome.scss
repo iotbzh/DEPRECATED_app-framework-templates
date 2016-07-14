@@ -1,0 +1,71 @@
+/* 
+ * Copyright (C) 2015 "IoT.bzh"
+ * Author "Fulup Ar Foll"
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@import "app/ibz-mixins";
+
+$COLOR_SUCCESS: green;
+$COLOR_FAIL: red;
+
+token-refresh {
+    display: block;
+    float: right;
+    margin: .5rem 1rem 0 0;
+}
+
+.button-box {
+    height  : 4.5rem;
+    
+    .session-button {
+      float: left;
+      width: 5rem;
+    };
+    
+    .response > span{
+        display: block;
+        margin: .3rem .5rem .3rem .5rem;        
+    }  
+    
+    .fail { 
+        color:$COLOR_FAIL;
+        border: 1px solid darken($COLOR_FAIL,10%);
+    }
+    .success { 
+        color:$COLOR_SUCCESS; 
+        border: 1px solid darken($COLOR_SUCCESS,10%);
+    }
+
+};
+
+.message-box {
+    height  : auto;
+    width: 100%;
+    font-size: .75rem;
+  
+    .response {
+        .err-no { color:grey; }
+        .res.err-ok { color: blue; }
+        .req.err-ok { color:blueviolet; }
+        .status.err-ok { color:green; }
+        .status.err-fx { color:red; }       
+    } 
+    
+
+};
+
+
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="xxxxxx-html5" version="0.1">
+  <name>App Framework - @@APPNAME@@</name>
+  <icon src="icon.png"/>
+  <content src="@@CONTENT@@" type="text/html"/>
+  <description>This application is used for ... (TODO: add description here)</description>
+  <author>John Doe &lt;john.doe@example.com&gt;</author>
+  <license>APL 2.0</license>
+</widget>
+
+

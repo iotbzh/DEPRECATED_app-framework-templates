@@ -1,0 +1,7 @@
+bower_components/
+node_modules/
+dist.*/
+*.DS_Store
+nbproject/private/
+.noderc*
+*.wgt

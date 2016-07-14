@@ -1,0 +1,35 @@
+<!-- Foundation Annotations generate tmp/route.js -->
+---
+name: SampleHome
+url:  /sample-home
+controller:   SampleHomeController as ctrl
+animationIn: slideInRight
+---
+
+<h3> 
+<img class="logo" src="images/logo/triskel_iot_bzhx250.png" alt="IoT.bzh Logo" style="height:150px;">
+  App Framework Binder Simple Client
+</h3>
+
+<token-refresh autolog="true" callback="ctrl.Initialised"></token-refresh>
+
+
+<div class="button-box box-content ">
+      
+    <submit-button class="session-button {{ctrl.class.connect}}" icon="fi-unlock" label="Connect" clicked="ctrl.ConnectClient" ></submit-button>
+    <submit-button class="session-button {{ctrl.class.check}}" icon="fi-checkbox" label="Check" clicked="ctrl.CheckSession" ></submit-button>
+    <submit-button class="session-button {{ctrl.class.refresh}}"  icon="fi-arrows-compress" label="Refresh"   clicked="ctrl.RefreshSession" ></submit-button>
+    <submit-button class="session-button {{ctrl.class.logout}}" icon="fi-lock" label="Logout" clicked="ctrl.LogoutClient" ></submit-button>
+    
+</div>
+<div class="message-box box-content vertical grid-frame">
+    <div class="response">
+        <span class="grid-content noscroll req {{ctrl.status}} ">req= {{ctrl.request}}</span>
+        <span class="grid-content noscroll res {{ctrl.status}} ">res= {{ctrl.response}}</span>
+        <span class="grid-content noscroll status {{ctrl.status}}">status= {{ctrl.errcode}}</span>
+    </div>
+</div>
+
+
+<link-button href="sample-post" icon="fi-home" label="SamplePost"></link-button>
+

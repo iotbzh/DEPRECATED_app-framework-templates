@@ -17,7 +17,7 @@
 # limitations under the License.
 ###########################################################################
 
-project(xxxxxx-hybrid)
+project(cpu-hybrid)
 
 cmake_minimum_required(VERSION 3.3)
 

@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 #define _GNU_SOURCE
+#include <stdio.h>
+#include <unistd.h>
 #include <json-c/json.h>
 
 #include <afb/afb-plugin.h>
@@ -29,18 +31,26 @@ static void ping (struct afb_req request)
 	afb_req_success_f(request, NULL, "Ping Binder Daemon count=%d query=%s", ++pingcount, json_object_to_json_string(query));
 }
 
-// NOTE: this sample does not use session to keep test a basic as possible
-//       in real application most APIs should be protected with AFB_SESSION_CHECK
+static void CPUCount (struct afb_req request)
+{
+	long count = sysconf(_SC_NPROCESSORS_ONLN);
+	char count_str[2];
+
+	snprintf (count_str, 2, "%ld", count);
+	afb_req_success(request, NULL, count_str);
+}
+
 static const struct AFB_verb_desc_v1 verbs[]= {
-  {"ping"     , AFB_SESSION_NONE, ping    , "Ping the binder"},
+  {"ping" , AFB_SESSION_NONE, ping     , "Ping the binder"},
+  {"count", AFB_SESSION_NONE, CPUCount , "returns number of CPUs on target board"},
   {NULL}
 };
 
 static const struct AFB_plugin plugin_desc = {
 	.type = AFB_PLUGIN_VERSION_1,
 	.v1 = {
-		.info = "xxxxxx hybrid service",
-		.prefix = "xxxxxx",
+		.info = "cpu hybrid service",
+		.prefix = "cpu",
 		.verbs = verbs
 	}
 };

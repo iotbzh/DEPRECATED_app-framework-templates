@@ -3,7 +3,7 @@
   <name>App Framework - @PROJECT_NAME@</name>
   <icon src="@PROJECT_ICON@"/>
   <content src="@PROJECT_LIBDIR@" type="application/vnd.agl.service"/>
-  <description>This service is used for ... (TODO: add description here)</description>
+  <description>This service is used for getting CPU status</description>
   <author>John Doe &lt;john.doe@example.com&gt;</author>
   <license>APL 2.0</license>
 </widget>

@@ -23,7 +23,7 @@ cmake_minimum_required(VERSION 3.3)
 
 include(GNUInstallDirs)
 
-set(PROJECT_ICON "icon_hybrid_128.png")
+set(PROJECT_ICON "icon_hybrid_qml_128.png")
 set(PROJECT_VERSION "0.1")
 set(PROJECT_LIBDIR "lib")
 

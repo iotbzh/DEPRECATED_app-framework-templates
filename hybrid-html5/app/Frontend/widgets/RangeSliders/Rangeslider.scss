@@ -1,0 +1,67 @@
+/*
+ * ibz-Datepicker for Foundation
+ *
+ * Author: Fulup Ar Foll
+ * Date  : March-2015
+ * Object: SASS stylesheet, customized to Foundation
+ * References: https://css-tricks.com/stripes-css/
+ *
+ */
+@import "app/ibz-mixins";
+
+.range-slider-handle {
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
+  top: -0.2rem;
+  width: 2rem;
+  height: 1.375rem;
+  border: 1px solid none;
+  cursor: pointer;
+  background: #008cba;
+}
+
+.range-slider.radius, .range-slider-handle {
+  background: #008cba;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.range-slider-active-segment {
+  display: inline-block;
+  top: 0.07rem;
+  position: absolute;
+  height: 0.80rem;
+  background: #e5e5e5;
+}
+
+.ibz-range-slider {
+   background-color: rgba(154, 205, 50, 0.6) !important;
+   height: 1rem;
+   position: relative;
+   
+  .range-slider-active-segment {
+    background-color: rgba(82, 168, 200, 0.6);
+  }
+  
+  &-display {
+    background-color: rgba(82, 168, 200, 0.6) !important;
+    width : 4rem !important;
+    padding: .25rem;
+    text-align:center
+   }
+
+   &-start,&-stop {
+   display: inline-block;
+   position: absolute;
+   padding-top: 2px;
+   height: 95%;
+   background: repeating-linear-gradient(
+    45deg,
+    #606dbc,
+    #606dbc 10px,
+    #465298 10px,
+    #465298 20px
+  );}
+
+}

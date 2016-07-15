@@ -17,14 +17,14 @@
 # limitations under the License.
 ###########################################################################
 
-project(xxxxxx-hybrid-html5)
+project(xxxxxx-html5)
 
 cmake_minimum_required(VERSION 3.3)
 
 include(GNUInstallDirs)
 
-set(PROJECT_ICON "icon_hybrid_128.png")
 set(PROJECT_VERSION "0.1")
+set(PROJECT_ICON "icon_html5_128.png")
 set(PROJECT_LIBDIR "lib")
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -48,37 +48,16 @@ set(CMAKE_C_FLAGS_CCOV         "-g -O2 --coverage")
 
 ###########################################################################
 
-include(FindPkgConfig)
-
-pkg_check_modules(EXTRAS REQUIRED json-c afb-daemon)
-add_compile_options(${EXTRAS_CFLAGS})
-include_directories(${EXTRAS_INCLUDE_DIRS})
-link_libraries(${EXTRAS_LIBRARIES})
-
-###########################################################################
-# the binding for afb
-
-message(STATUS "Creation of ${PROJECT_NAME} for AFB-DAEMON")
-
-###############################################################
-add_library(${PROJECT_NAME} MODULE binding/xxxxxx-hybrid-binding.c)
-set_target_properties(${PROJECT_NAME} PROPERTIES
-	PREFIX ""
-	LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/binding/export.map"
-)
-
 file(GLOB_RECURSE HTML5FILES app/*)
 
 add_custom_command(
 	OUTPUT ${PROJECT_NAME}.wgt
-	DEPENDS ${PROJECT_NAME} config.xml.in ${HTML5FILES} bower.json gulpfile.js package.json
+	DEPENDS config.xml.in ${HTML5FILES} bower.json gulpfile.js package.json
 	COMMAND rm -rf package
-	COMMAND mkdir -p package/${PROJECT_LIBDIR}
-	COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR} && gulp widget-config-prod && cp -a dist.prod ${CMAKE_CURRENT_BINARY_DIR}/package/htdocs
+	COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR} && gulp widget-config-prod && cp -a dist.prod ${CMAKE_CURRENT_BINARY_DIR}/package
 	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/../icons/${PROJECT_ICON} package/icon.png
-	COMMAND mv package/htdocs/config.xml package/
-	COMMAND cp ${PROJECT_NAME}.so package/${PROJECT_LIBDIR}
 	COMMAND wgtpkg-pack -f -o ${PROJECT_NAME}.wgt package 
+#	COMMAND rm -rf package
 )
 add_custom_target(widget ALL DEPENDS ${PROJECT_NAME}.wgt)
 

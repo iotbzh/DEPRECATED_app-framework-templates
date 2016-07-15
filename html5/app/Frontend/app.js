@@ -27,7 +27,6 @@
     'AppConfig',
     'JQueryEmu',
     'SampleHomeModule',
-    'UploadFiles',
     'LinkButton',
     'TokenRefresh',
     'RangeSlider',

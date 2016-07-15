@@ -17,7 +17,7 @@
 # limitations under the License.
 ###########################################################################
 
-project(xxxxxx-hybrid)
+project(xxxxxx-hybrid-qml)
 
 cmake_minimum_required(VERSION 3.3)
 

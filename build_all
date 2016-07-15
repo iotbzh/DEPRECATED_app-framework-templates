@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e
+
+PROJECTS="service native qml hybrid-qml html5 hybrid-html5"
+
+if [[ -z $(which node) ]]; then
+	echo "Installing node.js"
+	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+	sudo apt-get install nodejs
+	sudo npm install --global gulp
+fi
+
+TOPDIR=$(cd $(dirname $0) && pwd -P)
+mkdir -p $TOPDIR/widgets
+
+for project in $PROJECTS; do
+	echo "====================== BUILDING PROJECT $project ============================="
+	pushd $project
+		if [[ -f gulpfile.js ]]; then
+			[[ -d node_modules && -d bower_components ]] || npm install
+		fi
+
+		mkdir -p build
+		pushd build
+			cmake ..
+			make
+			cp -v *.wgt $TOPDIR/widgets/
+		popd
+	popd
+done
+
+echo "============================= BUILD FINISHED ================================="
+echo "Available widgets:"
+ls -l $TOPDIR/widgets
+

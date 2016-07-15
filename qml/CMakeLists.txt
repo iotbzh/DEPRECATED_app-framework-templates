@@ -17,7 +17,7 @@
 # limitations under the License.
 ###########################################################################
 
-project(xxxxxx-qml)
+project(xxxxxx-qml NONE)
 
 cmake_minimum_required(VERSION 3.3)
 

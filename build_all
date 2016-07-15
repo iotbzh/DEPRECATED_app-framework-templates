@@ -5,7 +5,12 @@ set -e
 PROJECTS="templates/service templates/native templates/qml templates/hybrid-qml templates/html5 templates/hybrid-html5"
 
 if [[ -z $(which node) ]]; then
-	echo "Installing node.js"
+	if [[ -z $(which apt-get) ]]; then
+		echo "NodeJS not installed. Please install it manually using the procedure described here:"
+		echo "   https://nodejs.org/en/download/package-manager/"
+		exit 1
+	fi
+	echo "Installing node.js (Debian or compatible)"
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 	sudo apt-get install nodejs
 	sudo npm install --global gulp
@@ -34,3 +39,9 @@ echo "============================= BUILD FINISHED =============================
 echo "Available widgets:"
 ls -l $TOPDIR/widgets
 
+echo "To deploy: "
+echo "# BOARDIP=1.2.3.4"
+echo "# scp *.wgt root@\$BOARDIP:~/"
+echo "# ssh root@\$BOARDIP"
+echo "# for w in i\$(ls *.wgt); do afm-util install \$w; done"
+echo "# afm-util list"

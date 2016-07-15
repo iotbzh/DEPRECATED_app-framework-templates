@@ -6,7 +6,9 @@ import QtWebSockets 1.0
 Window {
 	 // VARIABLES
 
-	property string address_str: "ws://localhost:1234/api?token=123456"
+	property string port_str: Qt.application.arguments[1]
+	property string token_str: Qt.application.arguments[2]
+	property string address_str: "ws://localhost:"+port_str+"/api?token="+token_str
 	property string api_str: "cpu"
 	property string verb_str: ""
 	property var msgid_enu: { "call":2, "retok":3, "reterr":4, "event":5 }

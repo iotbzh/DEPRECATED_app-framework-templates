@@ -61,7 +61,8 @@ link_libraries(${EXTRAS_LIBRARIES})
 message(STATUS "Creation of ${PROJECT_NAME} for AFB-DAEMON")
 
 ###############################################################
-add_library(${PROJECT_NAME} MODULE ${PROJECT_NAME}-binding.c)
+add_library(${PROJECT_NAME} MODULE ${PROJECT_NAME}-binding.c
+                                   ${PROJECT_NAME}-app.qml)
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	PREFIX ""
 	LINK_FLAGS "-Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/export.map"
@@ -75,6 +76,7 @@ add_custom_command(
 	COMMAND rm -rf package
 	COMMAND mkdir -p package/${PROJECT_LIBDIR} package/htdocs
 	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/../icons/${PROJECT_ICON} config.xml package/
+	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}-app.qml package/
 	COMMAND cp ${PROJECT_NAME}.so package/${PROJECT_LIBDIR}
 	COMMAND wgtpkg-pack -f -o ${PROJECT_NAME}.wgt package 
 	COMMAND rm -rf package

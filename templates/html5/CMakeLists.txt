@@ -55,7 +55,7 @@ add_custom_command(
 	DEPENDS config.xml.in ${HTML5FILES} bower.json gulpfile.js package.json
 	COMMAND rm -rf package
 	COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR} && gulp widget-config-prod && cp -a dist.prod ${CMAKE_CURRENT_BINARY_DIR}/package
-	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/../icons/${PROJECT_ICON} package/icon.png
+	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_ICON} package/icon.png
 	COMMAND wgtpkg-pack -f -o ${PROJECT_NAME}.wgt package 
 #	COMMAND rm -rf package
 )

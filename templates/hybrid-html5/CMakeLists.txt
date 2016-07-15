@@ -23,8 +23,8 @@ cmake_minimum_required(VERSION 3.3)
 
 include(GNUInstallDirs)
 
-set(PROJECT_ICON "icon_hybrid_128.png")
 set(PROJECT_VERSION "0.1")
+set(PROJECT_ICON "icon_hybrid_html5_128.png")
 set(PROJECT_LIBDIR "lib")
 
 set(CMAKE_BUILD_TYPE Debug)
@@ -75,7 +75,7 @@ add_custom_command(
 	COMMAND rm -rf package
 	COMMAND mkdir -p package/${PROJECT_LIBDIR}
 	COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR} && gulp widget-config-prod && cp -a dist.prod ${CMAKE_CURRENT_BINARY_DIR}/package/htdocs
-	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/../icons/${PROJECT_ICON} package/icon.png
+	COMMAND cp ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_ICON} package/icon.png
 	COMMAND mv package/htdocs/config.xml package/
 	COMMAND cp ${PROJECT_NAME}.so package/${PROJECT_LIBDIR}
 	COMMAND wgtpkg-pack -f -o ${PROJECT_NAME}.wgt package 

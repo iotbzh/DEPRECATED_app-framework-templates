@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" id="@PROJECT_NAME@" version="@PROJECT_VERSION@">
   <name>App Framework - @PROJECT_NAME@</name>
-  <icon src="@PROJECT_ICON@"/>
+  <icon src="icon.png"/>
   <content src="@PROJECT_NAME@-app.qml" type="application/vnd.agl.qml.hybrid"/>
   <description>This hybrid app is used for getting CPU status</description>
   <author>John Doe &lt;john.doe@example.com&gt;</author>

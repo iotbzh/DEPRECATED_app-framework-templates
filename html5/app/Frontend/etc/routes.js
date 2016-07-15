@@ -1,1 +1,1 @@
-var foundationRoutes = [{"name":"PostSample","url":"/sample-post","controller":"SamplePostController as ctrl","animationIn":"slideInRight","path":"pages/SamplePost/SamplePost.html"},{"name":"SampleHome","url":"/sample-home","controller":"SampleHomeController as ctrl","animationIn":"slideInRight","path":"pages/SampleHome/SampleHome.html"}]; 
+var foundationRoutes = [{"name":"SampleHome","url":"/sample-home","controller":"SampleHomeController as ctrl","animationIn":"slideInRight","path":"pages/SampleHome/SampleHome.html"}]; 

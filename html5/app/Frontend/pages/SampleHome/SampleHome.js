@@ -4,7 +4,7 @@
 // WARNING: make sure than app/frontend/services/AppConfig.js match your server
 
 // list all rependencies within the page + controler if needed
-angular.module('SampleHomeModule', ['SamplePostModule', 'SubmitButton', 'TokenRefresh','ModalNotification'])
+angular.module('SampleHomeModule', ['SubmitButton', 'TokenRefresh','ModalNotification'])
 
   .controller('SampleHomeController', function (AppCall, Notification) {
         var scope = this; // I hate JavaScript

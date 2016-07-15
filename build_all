@@ -2,7 +2,7 @@
 
 set -e
 
-PROJECTS="service native qml hybrid-qml html5 hybrid-html5"
+PROJECTS="templates/service templates/native templates/qml templates/hybrid-qml templates/html5 templates/hybrid-html5"
 
 if [[ -z $(which node) ]]; then
 	echo "Installing node.js"

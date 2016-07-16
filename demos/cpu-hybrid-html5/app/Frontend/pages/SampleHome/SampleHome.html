@@ -1,0 +1,30 @@
+<!-- Foundation Annotations generate tmp/route.js -->
+---
+name: SampleHome
+url:  /sample-home
+controller:   SampleHomeController as ctrl
+animationIn: slideInRight
+---
+
+<h3> 
+<img class="logo" src="images/logo/triskel_iot_bzhx250.png" alt="IoT.bzh Logo" style="height:150px;">
+  App Framework - Hybrid HTML5 Client - CPU application
+</h3>
+
+<token-refresh autolog="true" callback="ctrl.Initialised"></token-refresh>
+
+
+<div class="button-box box-content ">
+      
+    <submit-button class="session-button {{ctrl.class.refresh}}" label="CPU status" clicked="ctrl.CpuCount" ></submit-button>
+    
+</div>
+<div class="message-box box-content vertical grid-frame">
+    <div class="response">
+        <span class="grid-content noscroll req {{ctrl.status}} ">req/res= {{ctrl.request}}</span>
+        <span class="grid-content noscroll status {{ctrl.status}}">status= {{ctrl.errcode}}</span>
+    </div>
+</div>
+
+
+

@@ -2,7 +2,7 @@
 
 set -e
 
-PROJECTS="templates/service templates/native templates/qml templates/hybrid-qml templates/html5 templates/hybrid-html5"
+PROJECTS="templates/service templates/native templates/qml templates/hybrid-qml templates/html5 templates/hybrid-html5 demos/cpu-hybrid-qml"
 
 if [[ -z $(which node) ]]; then
 	if [[ -z $(which apt-get) ]]; then

@@ -3,8 +3,8 @@
   <name>App Framework - @PROJECT_NAME@</name>
   <icon src="icon.png"/>
   <content src="@PROJECT_NAME@-app.qml" type="application/vnd.agl.qml.hybrid"/>
-  <description>This application is used for ... (TODO: add description here)</description>
-  <author>John Doe &lt;john.doe@example.com&gt;</author>
+  <description>This hybrid app is used for getting CPU status</description>
+  <author>Manuel Bachmann &lt;mbc@iot.bzh&gt;</author>
   <license>APL 2.0</license>
 </widget>
 

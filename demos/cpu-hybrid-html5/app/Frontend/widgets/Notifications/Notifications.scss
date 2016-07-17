@@ -1,0 +1,63 @@
+/* 
+ * Copyright (C) 2015 "IoT.bzh"
+ * Author "Fulup Ar Foll"
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * Reference: http://www.greywyvern.com/?post=337
+ */
+
+@import "app/ibz-mixins";
+
+
+link-button {@include ibz-button(#3366ff,1rem)};
+
+// Modal should be relative and tip-modal-popup absolute
+tip-modal {
+    position:relative;
+}
+
+.tip-modal-popup {
+    //visibility: hidden;
+    width: 20rem;
+    position:absolute;
+    top:1em;
+    padding: 0.2em 0.6em;
+    border:1px solid #996633;
+    background-color:#e5ffff;
+    color:#000;
+    opacity:0;
+    transition:visibility .5s linear 1s,opacity 1s linear;
+    border-radius: 5px;
+    i {
+        margin: 0 .3rem 0 0;
+        display: inline;
+    }
+}
+
+token-refresh {
+    @include ibz-button(grey,1rem)
+    i {margin-left: .5rem;}
+    margin-right: 1rem;
+}
+
+token-refresh.online {
+    color: #0066cc;
+    i {color: lime;}    
+}
+
+token-refresh.offline {
+    color: #ff00ff;
+    i {color: red;}    
+}

@@ -17,9 +17,9 @@
 #define _GNU_SOURCE
 #include <json-c/json.h>
 
-#include <afb/afb-plugin.h>
+#include <afb/afb-binding.h>
 
-const struct AFB_interface *interface;
+const struct afb_binding_interface *interface;
 
 static void ping (struct afb_req request)
 {
@@ -31,13 +31,13 @@ static void ping (struct afb_req request)
 
 // NOTE: this sample does not use session to keep test a basic as possible
 //       in real application most APIs should be protected with AFB_SESSION_CHECK
-static const struct AFB_verb_desc_v1 verbs[]= {
+static const struct afb_verb_desc_v1 verbs[]= {
   {"ping"     , AFB_SESSION_NONE, ping    , "Ping the binder"},
   {NULL}
 };
 
-static const struct AFB_plugin plugin_desc = {
-	.type = AFB_PLUGIN_VERSION_1,
+static const struct afb_binding plugin_desc = {
+	.type = AFB_BINDING_VERSION_1,
 	.v1 = {
 		.info = "xxxxxx hybrid service",
 		.prefix = "xxxxxx",
@@ -45,7 +45,7 @@ static const struct AFB_plugin plugin_desc = {
 	}
 };
 
-const struct AFB_plugin *pluginAfbV1Register (const struct AFB_interface *itf)
+const struct afb_binding *afbBindingV1Register (const struct afb_binding_interface *itf)
 {
 	interface = itf;
 

@@ -21,7 +21,7 @@
 #include <unistd.h>
 #include <json-c/json.h>
 
-#include <afb/afb-plugin.h>
+#include <afb/afb-binding.h>
 
 #include <time.h>
 #include <systemd/sd-event.h>
@@ -29,7 +29,7 @@
 static long cpucount;
 static long double loadpast[4][MAXCPUS], loadnow[4][MAXCPUS], load[MAXCPUS];
 
-const struct AFB_interface *interface;
+const struct afb_binding_interface *interface;
 
 static void ping (struct afb_req request)
 {
@@ -124,15 +124,15 @@ static void CPULoad (struct afb_req request)
 	afb_req_success(request, NULL, load_str);
 }
 
-static const struct AFB_verb_desc_v1 verbs[]= {
+static const struct afb_verb_desc_v1 verbs[]= {
   {"ping" , AFB_SESSION_NONE, ping     , "Ping the binder"},
   {"count", AFB_SESSION_NONE, CPUCount , "returns number of CPUs on target board"},
   {"load" , AFB_SESSION_NONE, CPULoad  , "returns designated CPU load on target board"},
   {NULL}
 };
 
-static const struct AFB_plugin plugin_desc = {
-	.type = AFB_PLUGIN_VERSION_1,
+static const struct afb_binding plugin_desc = {
+	.type = AFB_BINDING_VERSION_1,
 	.v1 = {
 		.info = "cpu hybrid service",
 		.prefix = "cpu",
@@ -140,7 +140,7 @@ static const struct AFB_plugin plugin_desc = {
 	}
 };
 
-const struct AFB_plugin *pluginAfbV1Register (const struct AFB_interface *itf)
+const struct afb_binding *afbBindingV1Register (const struct afb_binding_interface *itf)
 {
 	interface = itf;
 	sd_event *loop;

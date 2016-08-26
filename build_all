@@ -23,7 +23,17 @@ for project in $PROJECTS; do
 	echo "====================== BUILDING PROJECT $project ============================="
 	pushd $project
 		if [[ -f gulpfile.js ]]; then
-			[[ -d node_modules && -d bower_components ]] || npm install
+			[[ ! -d node_modules ]] && {
+				[[ -d $TOPDIR/node_modules ]] && ln -sf $TOPDIR/node_modules . || {
+					npm install
+					mv node_modules bower_components $TOPDIR
+					ln -sf $TOPDIR/node_modules .
+					ln -sf $TOPDIR/bower_components .
+				}
+			}
+			[[ ! -d bower_components ]] && {
+				[[ -d $TOPDIR/bower_components ]] && ln -sf $TOPDIR/bower_components || { echo "Bower components not found in $TOPDIR"; exit 1; }
+			}
 		fi
 
 		mkdir -p build

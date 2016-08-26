@@ -4,3 +4,5 @@ Makefile
 cmake_install.cmake
 .*.sw*
 /widgets
+node_modules
+bower_components

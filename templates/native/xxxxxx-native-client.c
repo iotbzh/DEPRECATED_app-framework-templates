@@ -65,6 +65,9 @@ static void usage(int status, char *arg0)
 /* entry function */
 int main(int ac, char **av, char **env)
 {
+	int rc;
+	sd_event *loop;
+
 	/* check the argument count */
 	if (ac != 2 && ac != 4 && ac != 5)
 		usage(1, av[0]);
@@ -73,8 +76,15 @@ int main(int ac, char **av, char **env)
 	if (!strcmp(av[1], "-h") || !strcmp(av[1], "--help"))
 		usage(0, av[0]);
 
+	/* get the default event loop */
+	rc = sd_event_default(&loop);
+	if (rc < 0) {
+		fprintf(stderr, "connection to default event loop failed: %s\n", strerror(-rc));
+		return 1;
+	}
+
 	/* connect the websocket wsj1 to the uri given by the first argument */
-	wsj1 = afb_ws_client_connect_wsj1(av[1], &itf, NULL);
+	wsj1 = afb_ws_client_connect_wsj1(loop,av[1], &itf, NULL);
 	if (wsj1 == NULL) {
 		fprintf(stderr, "connection to %s failed: %m\n", av[1]);
 		return 1;
@@ -84,7 +94,7 @@ int main(int ac, char **av, char **env)
 	if (ac == 2) {
 		/* get requests from stdin */
 		fcntl(0, F_SETFL, O_NONBLOCK);
-		sd_event_add_io(afb_ws_client_get_event_loop(), &evsrc, 0, EPOLLIN, io_event_callback, NULL);
+		sd_event_add_io(loop, &evsrc, 0, EPOLLIN, io_event_callback, NULL);
 	} else {
 		/* the request is defined by the arguments */
 		exonrep = 1;
@@ -93,7 +103,7 @@ int main(int ac, char **av, char **env)
 
 	/* loop until end */
 	for(;;)
-		sd_event_run(afb_ws_client_get_event_loop(), 30000000);
+		sd_event_run(loop, 30000000);
 	return 0;
 }
 

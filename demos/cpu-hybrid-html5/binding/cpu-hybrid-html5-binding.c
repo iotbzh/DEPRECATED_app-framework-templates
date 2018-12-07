@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include <json-c/json.h>
 
+#define AFB_BINDING_VERSION 2
 #include <afb/afb-binding.h>
 
 #include <time.h>
@@ -28,8 +29,6 @@
 #define MAXCPUS 16
 static long cpucount;
 static long double loadpast[4][MAXCPUS], loadnow[4][MAXCPUS], load[MAXCPUS];
-
-const struct afb_binding_interface *interface;
 
 static void ping (struct afb_req request)
 {
@@ -124,25 +123,15 @@ static void CPULoad (struct afb_req request)
 	afb_req_success(request, NULL, load_str);
 }
 
-static const struct afb_verb_desc_v1 verbs[]= {
-  {"ping" , AFB_SESSION_NONE, ping     , "Ping the binder"},
-  {"count", AFB_SESSION_NONE, CPUCount , "returns number of CPUs on target board"},
-  {"load" , AFB_SESSION_NONE, CPULoad  , "returns designated CPU load on target board"},
-  {NULL}
-};
-
-static const struct afb_binding plugin_desc = {
-	.type = AFB_BINDING_VERSION_1,
-	.v1 = {
-		.info = "cpu hybrid service",
-		.prefix = "cpu",
-		.verbs = verbs
-	}
-};
-
-const struct afb_binding *afbBindingV1Register (const struct afb_binding_interface *itf)
+static int preinit()
 {
-	interface = itf;
+        AFB_NOTICE("binding preinit (was register)");
+        return 0;
+}
+
+static int init()
+{
+        AFB_NOTICE("binding init");
 	sd_event *loop;
 	sd_event_source *src;
 	uint64_t now;
@@ -158,10 +147,26 @@ const struct afb_binding *afbBindingV1Register (const struct afb_binding_interfa
 		loadpast[0][i] = loadpast[1][i]	= loadpast[2][i] = loadpast[3][i] = 0;
 
 	/* register the CPU load measuring function, fires immediately ("now") */
-	loop = afb_daemon_get_event_loop (interface->daemon);
+	loop = afb_daemon_get_event_loop ();
 	sd_event_now (loop, CLOCK_MONOTONIC, &now);
 	sd_event_add_time (loop, &src, CLOCK_MONOTONIC, now, 0,
 					   MeasureCPULoad, loop);
 
-	return &plugin_desc;
+        return 0;
 }
+
+
+static const struct afb_verb_v2 verbs[]= {
+  { "ping" , ping     , NULL, "Ping the binder",                           AFB_SESSION_NONE},
+  { "count", CPUCount , NULL, "returns number of CPUs on target board",    AFB_SESSION_NONE},
+  { "load" , CPULoad  , NULL, "returns designated CPU load on target board", AFB_SESSION_NONE},
+  { NULL}
+};
+
+const struct afb_binding_v2 afbBindingV2 = {
+		.api = "cpu",
+		.specification = NULL,
+		.verbs = verbs,
+		.preinit = preinit,
+		.init = init
+};

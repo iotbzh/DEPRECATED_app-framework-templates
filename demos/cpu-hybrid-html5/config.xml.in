@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <widget xmlns="http://www.w3.org/ns/widgets" id="cpu-hybrid-html5" version="0.1">
-  <name>App Framework - @@APPNAME@@</name>
+  <name>@@APPNAME@@</name>
   <icon src="icon.png"/>
-  <content src="@@CONTENT@@" type="application/vnd.agl.html.hybrid"/>
+  <content src="@@CONTENT@@" type="text/html"/>
   <description>This hybrid app is used for getting CPU status</description>
   <author>Manuel Bachmann &lt;mbc@iot.bzh&gt;</author>
   <license>APL 2.0</license>
+
+  <feature name="urn:AGL:widget:required-api">
+    <param name="windowmanager" value="ws" />
+    <param name="homescreen" value="ws" />
+    <param name="lib/cpu-hybrid-html5.so" value="local" />
+  </feature>
 </widget>
 
 

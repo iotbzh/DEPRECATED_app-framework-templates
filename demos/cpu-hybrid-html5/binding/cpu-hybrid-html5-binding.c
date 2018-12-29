@@ -73,6 +73,7 @@ static int MeasureCPULoad (sd_event_source *src, uint64_t now, void *data)
 
 	/* iterate on each CPU */
 	for (num = 0; num < cpucount; num++) {
+		cpuname[3] ='\0';
 		/* construct lookup string ("cpu1" e.g.) */
 		snprintf (num_str, 2, "%d", num);
 		strncat (cpuname, num_str, 2);
